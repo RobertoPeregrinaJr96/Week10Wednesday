@@ -47,10 +47,10 @@ router.get("/", (req, res) => {
  */
 // Your code here
 router.get('/:id', (req, res) => {
-    const sql = 'SELECT id, tree, location, height_ft, ground_circumference_ft FROM tree WHERE id = ?'
+    const sql = 'SELECT * FROM trees where id = ?;'
     const params = [req.params.id]
 
-    db.get(sql, params, (err, row) => {
+    db.get(sql, params, (err, row,next) => {
         if (err) {
             res.json(err)
         } else {
