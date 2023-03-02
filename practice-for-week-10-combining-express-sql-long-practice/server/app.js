@@ -1,10 +1,13 @@
 // Instantiate Express and the application
+const { json } = require('express');
 const express = require('express');
 const app = express();
 
 // Process environment variables
 require('dotenv').config();
 
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database(process.env.DATA_SOURCE, sqlite3.OPEN_READWRITE);
 // Express using json
 app.use(express.json());
 
@@ -18,6 +21,7 @@ app.get('/', (req, res) => {
         message: "API server is running"
     });
 });
+
 
 // Custom error middleware (triggered via call to next(err))
 app.use((err, req, res, next) => {
